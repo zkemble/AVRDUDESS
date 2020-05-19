@@ -255,6 +255,16 @@ namespace avrdudess
             set { cmdVerbose.SelectedItem = value; }
         }
 
+        public bool enableMCUAutoDetect
+        {
+            get { return cbMCUAutoDetectEnabled.Checked; }
+            set 
+            { 
+                cbMCUAutoDetectEnabled.Checked = value;
+                cmbMCU.Enabled = !value; 
+            }
+        }
+
         #endregion
 
         public Form1(string[] args)
@@ -478,11 +488,12 @@ namespace avrdudess
             cbDisableFlashErase.CheckedChanged += event_controlChanged;
             cbEraseFlashEEPROM.CheckedChanged += event_controlChanged;
             txtAdditional.TextChanged += event_controlChanged;
+            cbMCUAutoDetectEnabled.CheckedChanged += event_controlChanged;
 
             Language.Translation.apply(this);
 
             // Check for updates
-            if (UpdateCheck.check.needed())
+            if (UpdateCheck.check.needed() && Config.Prop.checkForUpdates)
             {
                 Thread t = new Thread(() =>
                 {
@@ -801,10 +812,13 @@ namespace avrdudess
         private void enableControls()
         {
             bool progOK = (prog != null);
-
-            btnDetect.Enabled = progOK;
-
             bool enable = (mcu != null && progOK);
+
+            if (enableMCUAutoDetect)
+                btnDetect.Enabled = progOK;
+            else
+                btnDetect.Enabled = progOK && enable;
+
             btnFuseSelector.Enabled = enable;
             btnWriteFuses.Enabled = enable;
             btnReadFuses.Enabled = enable;
@@ -900,6 +914,9 @@ namespace avrdudess
         // General event for when a control changes
         private void event_controlChanged(object sender, EventArgs e)
         {
+            if (sender == cbMCUAutoDetectEnabled)
+                cmbMCU.Enabled = !((CheckBox)sender).Checked;
+
             // NOTE: Radio button change doesn't generate an event here
             cmdLine.generate();
             enableControls();
@@ -1074,6 +1091,7 @@ namespace avrdudess
             fOptions.language = Config.Prop.language;
             fOptions.hiddenProgrammers = Config.Prop.hiddenProgrammers;
             fOptions.hiddenMCUs = Config.Prop.hiddenMCUs;
+            fOptions.checkForUpdates = Config.Prop.checkForUpdates;
 
             if (fOptions.ShowDialog() == DialogResult.OK)
             {
@@ -1089,6 +1107,7 @@ namespace avrdudess
                 Config.Prop.language = fOptions.language;
                 Config.Prop.hiddenProgrammers = fOptions.hiddenProgrammers;
                 Config.Prop.hiddenMCUs = fOptions.hiddenMCUs;
+                Config.Prop.checkForUpdates = fOptions.checkForUpdates;
 
                 ToolTips.Active = Config.Prop.toolTips;
 
@@ -1206,6 +1225,7 @@ namespace avrdudess
             preset.setLock = setLock;
             preset.additional = additionalSettings;
             preset.verbosity = verbosity;
+            preset.enableMCUAutoDetect = enableMCUAutoDetect;
 
             return preset;
         }
@@ -1236,6 +1256,7 @@ namespace avrdudess
             setLock = item.setLock;
             additionalSettings = item.additional;
             verbosity = item.verbosity;
+            enableMCUAutoDetect = item.enableMCUAutoDetect;
         }
 
         // Preset choice changed
@@ -1377,7 +1398,7 @@ namespace avrdudess
         // Simone Chifari (Auto detect MCU)
         private void btnDetect_Click(object sender, EventArgs e)
         {
-            avrdude.detectMCU(cmdLine.genReadSig());
+            avrdude.detectMCU(cmdLine.genReadSig(enableMCUAutoDetect));
         }
 
         // Open fuse selector window
@@ -1514,6 +1535,6 @@ namespace avrdudess
                 Config.Prop.windowLocation = Location;
         }
 
-#endregion
+        #endregion
     }
 }

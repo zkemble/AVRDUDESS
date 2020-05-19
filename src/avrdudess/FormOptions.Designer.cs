@@ -39,6 +39,7 @@
             this.txtAvrdudeConfLocation = new System.Windows.Forms.TextBox();
             this.txtAvrdudeLocation = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbCheckForUpdate = new System.Windows.Forms.CheckBox();
             this.cbUsePrevSettings = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
@@ -173,16 +174,29 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.cbCheckForUpdate);
             this.groupBox2.Controls.Add(this.cbUsePrevSettings);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.cbLanguage);
             this.groupBox2.Controls.Add(this.cbShowToolTips);
             this.groupBox2.Location = new System.Drawing.Point(12, 118);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(510, 77);
+            this.groupBox2.Size = new System.Drawing.Size(510, 98);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "_GRP_OTHER";
+            // 
+            // cbCheckForUpdate
+            // 
+            this.cbCheckForUpdate.AutoSize = true;
+            this.cbCheckForUpdate.Checked = true;
+            this.cbCheckForUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCheckForUpdate.Location = new System.Drawing.Point(261, 70);
+            this.cbCheckForUpdate.Name = "cbCheckForUpdate";
+            this.cbCheckForUpdate.Size = new System.Drawing.Size(141, 17);
+            this.cbCheckForUpdate.TabIndex = 43;
+            this.cbCheckForUpdate.Text = "_CHECKFORUPDATES";
+            this.cbCheckForUpdate.UseVisualStyleBackColor = true;
             // 
             // cbUsePrevSettings
             // 
@@ -229,7 +243,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(447, 617);
+            this.btnCancel.Location = new System.Drawing.Point(447, 634);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -240,7 +254,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(366, 617);
+            this.btnOK.Location = new System.Drawing.Point(366, 634);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 4;
@@ -252,7 +266,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.clbHiddenProgrammers);
-            this.groupBox3.Location = new System.Drawing.Point(12, 201);
+            this.groupBox3.Location = new System.Drawing.Point(12, 222);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(510, 200);
             this.groupBox3.TabIndex = 2;
@@ -280,7 +294,7 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.clbHiddenMCUs);
-            this.groupBox4.Location = new System.Drawing.Point(12, 407);
+            this.groupBox4.Location = new System.Drawing.Point(12, 428);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(510, 200);
             this.groupBox4.TabIndex = 3;
@@ -309,7 +323,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(534, 647);
+            this.ClientSize = new System.Drawing.Size(534, 664);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnOK);
@@ -357,5 +371,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckedListBox clbHiddenMCUs;
         private System.Windows.Forms.CheckBox cbUsePrevSettings;
+        private System.Windows.Forms.CheckBox cbCheckForUpdate;
     }
 }

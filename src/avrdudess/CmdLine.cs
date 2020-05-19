@@ -53,19 +53,22 @@ namespace avrdudess
                 cmdLineOption("v");
         }
 
-        public string genReadSig()
+        public string genReadSig(bool enableAutoDetect)
         {
-            generateMain(false);
+            generateMain(!enableAutoDetect);
 
             if (mainForm.additionalSettings.Length > 0)
                 sb.Append(mainForm.additionalSettings + " ");
 
-            // AVRDUDE needs -p defined to work, so just set m8
-            cmdLineOption("p", "m8");
+            if (enableAutoDetect)
+            {
+                // AVRDUDE needs -p defined to work, so just set m8
+                cmdLineOption("p", "m8");
+            }
 
             return sb.ToString();
         }
-        
+
         public string generateReadFusesLock(Avrdude.FuseLockType[] types)
         {
             generateMain();
